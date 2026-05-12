@@ -5,6 +5,7 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   plugins: [react(), tailwindcss()], // Quitamos jsxLocPlugin para ganar velocidad
+  base: '/Loopra/',
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "src"),
