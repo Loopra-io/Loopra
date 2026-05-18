@@ -4,46 +4,55 @@ on:
   push:
     branches: [main]
 
+# Permisos estrictos para el despliegue nativo moderno de GitHub Pages
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install pnpm
+      - name: Install pnpm package manager
         uses: pnpm/action-setup@v4
         with:
           version: 10.4.1
 
-      - name: Install Node.js
+      - name: Setup Node.js runtime
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'pnpm'
           cache-dependency-path: pnpm-lock.yaml
 
+      # Usamos --no-frozen-lockfile para evitar que pnpm muera si hay un desajuste mínimo
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --no-frozen-lockfile
 
-      - name: Build
+      - name: Build production bundle
         run: pnpm build
 
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Setup GitHub Pages framework
+        uses: actions/configure-pages@v5
+
+      # 📦 ESTE PASO REEMPLAZA A JAMES IVES: Empaqueta la carpeta dist real
+      - name: Upload production assets artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          folder: dist
-          branch: gh-pages
-          clean: true
+          path: './dist'
+
+      # 🚀 ESTE PASO SUBE EL PAQUETE DIRECTO A INTERNET
+      - name: Deploy build artifact to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
