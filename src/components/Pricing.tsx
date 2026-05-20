@@ -1,48 +1,81 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { Code2, Palette, Zap } from 'lucide-react';
+import { Check } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
-const technologies = [
+const plans = [
   {
-    name: 'React',
-    icon: Code2,
-    description: 'Framework UI moderno para interfaces interactivas y responsivas',
-    color: 'from-blue-400 to-cyan-400',
+    name: 'Startup',
+    price: '$99',
+    period: '/mes',
+    description: 'Para emprendimientos y pequeños equipos',
+    features: [
+      'Acceso a 1 ecosistema',
+      'Hasta 50 usuarios',
+      '10 GB de almacenamiento',
+      'Soporte por email',
+      'Actualizaciones automáticas',
+      'API básica',
+    ],
+    cta: 'Comenzar',
+    highlighted: false,
   },
   {
-    name: 'TypeScript',
-    icon: Code2,
-    description: 'Tipado estático para código robusto y mantenible',
-    color: 'from-blue-500 to-blue-600',
+    name: 'Profesional',
+    price: '$299',
+    period: '/mes',
+    description: 'Para empresas en crecimiento',
+    features: [
+      'Acceso a todos los ecosistemas',
+      'Usuarios ilimitados',
+      '500 GB de almacenamiento',
+      'Soporte prioritario 24/7',
+      'Analíticas avanzadas',
+      'API completa',
+      'Integraciones personalizadas',
+      'Capacitación incluida',
+    ],
+    cta: 'Seleccionar Plan',
+    highlighted: true,
   },
   {
-    name: 'Tailwind CSS',
-    icon: Palette,
-    description: 'Utilidades CSS para diseño rápido y consistente',
-    color: 'from-cyan-400 to-blue-500',
-  },
-  {
-    name: 'Framer Motion',
-    icon: Zap,
-    description: 'Animaciones fluidas y microinteracciones profesionales',
-    color: 'from-purple-400 to-pink-500',
+    name: 'Empresarial',
+    price: 'Personalizado',
+    period: '',
+    description: 'Para grandes organizaciones',
+    features: [
+      'Todo en Profesional',
+      'Almacenamiento ilimitado',
+      'Soporte dedicado 24/7',
+      'SLA garantizado 99.99%',
+      'Servidor dedicado',
+      'Auditoría y compliance',
+      'Onboarding personalizado',
+      'Roadmap dedicado',
+    ],
+    cta: 'Contactar Ventas',
+    highlighted: false,
   },
 ];
 
-export default function TechStack() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-
+export default function Pricing() {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1,
+      },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5 },
+    },
   };
 
   return (
@@ -57,98 +90,84 @@ export default function TechStack() {
           className="text-center mb-16 md:mb-20"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            ADN Técnico de Loopra
+            Planes Flexibles
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Construimos ecosistemas con las tecnologías más modernas y confiables del mercado.
+            Elige el plan perfecto para tu organización. Escala según tus necesidades sin compromisos a largo plazo.
           </p>
         </motion.div>
 
-        {/* ✅ FIXED: era lg:grid-cols-5 con solo 4 items — ahora lg:grid-cols-4 */}
+        {/* Pricing Cards */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-6"
         >
-          {technologies.map((tech, index) => {
-            const Icon = tech.icon;
-            return (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-                className="relative group"
-              >
-                {/* Card */}
-                <motion.div
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  transition={{ duration: 0.3 }}
-                  className="p-5 md:p-6 rounded-2xl border border-border bg-card hover:border-primary/50 transition-all duration-300 cursor-pointer h-full flex flex-col items-center justify-center text-center"
-                >
-                  {/* Icon Container */}
-                  <motion.div
-                    animate={hoveredIndex === index ? { scale: 1.1, rotate: 360 } : { scale: 1, rotate: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className={`w-12 h-12 md:w-16 md:h-16 rounded-xl bg-gradient-to-br ${tech.color} flex items-center justify-center mb-3 md:mb-4 shadow-lg`}
-                  >
-                    <Icon className="w-6 h-6 md:w-8 md:h-8 text-white" strokeWidth={1.5} />
-                  </motion.div>
+          {plans.map((plan, index) => (
+            <motion.div
+              key={index}
+              variants={itemVariants}
+              className={`relative rounded-2xl p-8 transition-all duration-300 ${
+                plan.highlighted
+                  ? 'border-2 border-primary bg-card shadow-xl shadow-primary/20 scale-105 md:scale-100'
+                  : 'border border-border bg-card hover:border-primary/30 hover:shadow-lg'
+              }`}
+            >
+              {/* Badge */}
+              {plan.highlighted && (
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                  <div className="bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-semibold">
+                    Más Popular
+                  </div>
+                </div>
+              )}
 
-                  {/* Name */}
-                  <h3 className="text-sm md:text-lg font-bold text-foreground mb-2">
-                    {tech.name}
-                  </h3>
+              {/* Plan Name */}
+              <h3 className="text-2xl font-bold text-foreground mb-2">
+                {plan.name}
+              </h3>
+              <p className="text-muted-foreground text-sm mb-6">
+                {plan.description}
+              </p>
 
-                  {/* Description - Appears on hover (hidden on mobile) */}
-                  <motion.p
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={
-                      hoveredIndex === index
-                        ? { opacity: 1, height: 'auto' }
-                        : { opacity: 0, height: 0 }
-                    }
-                    transition={{ duration: 0.3 }}
-                    className="text-xs md:text-sm text-muted-foreground overflow-hidden hidden md:block"
-                  >
-                    {tech.description}
-                  </motion.p>
-
-                  {/* Description always visible on mobile */}
-                  <p className="text-xs text-muted-foreground mt-1 md:hidden leading-tight">
-                    {tech.description}
-                  </p>
-                </motion.div>
-
-                {/* Glow effect on hover */}
-                {hoveredIndex === index && (
-                  <motion.div
-                    layoutId={`glow-${index}`}
-                    className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${tech.color} opacity-10 blur-xl -z-10`}
-                    animate={{ scale: 1.2 }}
-                    transition={{ duration: 0.3 }}
-                  />
+              {/* Price */}
+              <div className="mb-8">
+                <span className="text-5xl font-bold text-foreground">
+                  {plan.price}
+                </span>
+                {plan.period && (
+                  <span className="text-muted-foreground ml-2">{plan.period}</span>
                 )}
-              </motion.div>
-            );
-          })}
-        </motion.div>
+              </div>
 
-        {/* Bottom text */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="mt-12 md:mt-16 text-center"
-        >
-          <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">
-            Cada tecnología está cuidadosamente seleccionada para garantizar rendimiento, escalabilidad y experiencia de usuario excepcional.
-          </p>
+              {/* CTA Button */}
+              <Button
+                className={`w-full mb-8 rounded-xl font-semibold transition-all duration-200 ${
+                  plan.highlighted
+                    ? 'bg-primary hover:bg-primary/90 text-primary-foreground'
+                    : 'border border-primary text-primary hover:bg-primary/10'
+                }`}
+                variant={plan.highlighted ? 'default' : 'outline'}
+              >
+                {plan.cta}
+              </Button>
+
+              {/* Features List */}
+              <div className="space-y-4">
+                {plan.features.map((feature, featureIndex) => (
+                  <div key={featureIndex} className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" strokeWidth={2} />
+                    <span className="text-foreground">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>
   );
 }
+

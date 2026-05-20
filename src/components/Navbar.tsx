@@ -46,7 +46,7 @@ const Navbar: FC = () => {
     { label: 'Ecosistemas', href: '#', dropdown: true },
     { label: 'Proyectos', href: '/proyectos' },
     { label: 'Sobre el Estudio', href: '/sobre-estudio' },
-    { label: 'Documentación', href: '/documentacion' },
+    { label: 'Documentación', href: '/docs' },
   ];
 
   const getStatusStyles = (status: Ecosystem['status']): string => {
@@ -105,10 +105,6 @@ const Navbar: FC = () => {
     );
   };
 
-   const scrollToTop = () => {
-     window.scrollTo({ top: 0, behavior: 'smooth' });
-   };
-
   return (
     <motion.nav
       initial={{ opacity: 0, y: -20 }}
@@ -119,14 +115,20 @@ const Navbar: FC = () => {
       <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link 
-  to="/" 
-  onClick={scrollToTop} // <--- Añade esto
-  className="flex items-center gap-2 hover:opacity-80 transition-opacity shrink-0"
->
-  <img src="/favicon.png" alt="Loopra logo" className="w-8 h-8 object-contain" />
-  <span className="text-xl font-bold text-foreground hidden sm:block">Loopra</span>
-</Link>
+          <Link
+            to="/"
+            className="flex items-center gap-2 hover:opacity-80 transition-opacity flex-shrink-0"
+            aria-label="Loopra home"
+          >
+            <img
+              src="/favicon.png"
+              alt="Loopra logo"
+              className="w-8 h-8 object-contain"
+            />
+            <span className="text-xl font-bold text-foreground hidden sm:inline">
+              Loopra
+            </span>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">

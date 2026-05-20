@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
-import { Sparkles, Users, Target, Zap } from 'lucide-react';
-
-// ✅ FIXED: <Layout> eliminado — App.tsx ya lo envuelve
+import { Sparkles, Users, Target, Zap, ArrowRight, Building2, Activity } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 const values = [
   {
@@ -23,6 +23,37 @@ const values = [
     icon: Zap,
     title: 'Impacto',
     description: 'Medimos nuestro éxito por el impacto positivo que generamos en el mundo.',
+  },
+];
+
+const stats = [
+  { icon: Building2, value: '500+',  label: 'Instituciones',     description: 'Usando nuestros ecosistemas' },
+  { icon: Users,     value: '100K+', label: 'Usuarios Activos',  description: 'En tiempo real'             },
+  { icon: Zap,       value: '3',     label: 'Ecosistemas',       description: 'En producción y desarrollo'  },
+  { icon: Activity,  value: '99.9%', label: 'Uptime',            description: 'Disponibilidad garantizada' },
+];
+
+const team = [
+  {
+    name: 'Kener Alejandro Botina Bravo',
+    role: 'Fundador & Lead Engineer',
+    initials: 'KB',
+    bio: 'Ingeniero de software apasionado por construir ecosistemas que transformen la manera en que las personas aprenden y colaboran.',
+    placeholder: false,
+  },
+  {
+    name: 'Únete al Equipo',
+    role: 'Diseñador de Producto',
+    initials: '+',
+    bio: 'Buscamos un diseñador apasionado por crear experiencias digitales de alto impacto que conecten con millones de usuarios.',
+    placeholder: true,
+  },
+  {
+    name: 'Únete al Equipo',
+    role: 'Ingeniero de Software',
+    initials: '+',
+    bio: 'Buscamos un ingeniero senior con experiencia en ecosistemas escalables y arquitecturas modernas en la nube.',
+    placeholder: true,
   },
 ];
 
@@ -83,20 +114,34 @@ export default function SobreEstudio() {
               </p>
             </motion.div>
 
-            {/* Right */}
+            {/* Right — Stats */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="relative"
+              className="grid grid-cols-2 gap-4"
             >
-              <div className="w-full h-60 md:h-80 rounded-3xl bg-gradient-to-br from-primary/20 to-secondary/20 border border-border flex items-center justify-center">
-                <div className="text-center">
-                  <Sparkles className="w-12 h-12 md:w-16 md:h-16 text-primary mx-auto mb-4" strokeWidth={1.5} />
-                  <p className="text-foreground font-semibold text-sm md:text-base">Innovación Constante</p>
-                </div>
-              </div>
+              {stats.map((stat, idx) => {
+                const Icon = stat.icon;
+                return (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: idx * 0.1 }}
+                    viewport={{ once: true }}
+                    className="p-5 rounded-2xl border border-border bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-md"
+                  >
+                    <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
+                      <Icon className="w-4 h-4 text-primary" strokeWidth={1.5} />
+                    </div>
+                    <p className="text-2xl font-bold text-primary mb-0.5">{stat.value}</p>
+                    <p className="text-sm font-semibold text-foreground">{stat.label}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">{stat.description}</p>
+                  </motion.div>
+                );
+              })}
             </motion.div>
           </div>
         </div>
@@ -164,21 +209,89 @@ export default function SobreEstudio() {
               Nuestro Equipo
             </h2>
             <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto mb-10 md:mb-12 px-2">
-              Somos un equipo diverso de expertos en ingeniería, diseño, producto y estrategia.
+              Personas apasionadas construyendo tecnología con propósito.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
-              {[1, 2, 3].map((_, idx) => (
+              {team.map((member, idx) => (
                 <motion.div
                   key={idx}
                   whileHover={{ scale: 1.03 }}
-                  className="p-6 md:p-8 rounded-2xl border border-border bg-card"
+                  transition={{ duration: 0.3 }}
+                  className={`p-6 md:p-8 rounded-2xl border bg-card text-left transition-all duration-300 ${
+                    member.placeholder
+                      ? 'border-dashed border-border hover:border-primary/40'
+                      : 'border-border hover:border-primary/30 hover:shadow-lg'
+                  }`}
                 >
-                  <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-primary/10 mx-auto mb-4" />
-                  <h3 className="text-base md:text-lg font-bold text-foreground">Miembro del Equipo</h3>
-                  <p className="text-sm text-muted-foreground">Rol en Loopra</p>
+                  <div className={`w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold ${
+                    member.placeholder
+                      ? 'bg-muted text-muted-foreground border-2 border-dashed border-border'
+                      : 'bg-primary/10 text-primary'
+                  }`}>
+                    {member.initials}
+                  </div>
+                  <h3 className={`text-base md:text-lg font-bold mb-1 text-center ${
+                    member.placeholder ? 'text-muted-foreground' : 'text-foreground'
+                  }`}>
+                    {member.name}
+                  </h3>
+                  <p className={`text-sm text-center mb-3 ${
+                    member.placeholder ? 'text-muted-foreground/60' : 'text-primary font-medium'
+                  }`}>
+                    {member.role}
+                  </p>
+                  <p className="text-sm text-muted-foreground text-center leading-relaxed">
+                    {member.bio}
+                  </p>
+                  {member.placeholder && (
+                    <div className="mt-4 text-center">
+                      <Link
+                        to="/carreras"
+                        className="text-xs text-primary hover:text-primary/80 font-medium transition-colors"
+                      >
+                        Ver posición →
+                      </Link>
+                    </div>
+                  )}
                 </motion.div>
               ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-12 md:py-20 px-4 md:px-8 lg:px-12 bg-background">
+        <div className="max-w-3xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="relative rounded-3xl overflow-hidden text-center"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-primary/5 to-transparent pointer-events-none" />
+            <div className="relative p-8 md:p-12">
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
+                ¿Quieres ser parte de Loopra?
+              </h2>
+              <p className="text-base text-muted-foreground mb-8 max-w-xl mx-auto">
+                Estamos construyendo el futuro del software. Si compartes nuestra visión, nos encantaría conocerte.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Link to="/carreras">
+                  <Button className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl font-semibold w-full sm:w-auto">
+                    Ver Carreras
+                    <ArrowRight className="ml-2 w-4 h-4" strokeWidth={2} />
+                  </Button>
+                </Link>
+                <Link to="/contacto">
+                  <Button variant="outline" className="rounded-xl border-border hover:bg-muted font-semibold w-full sm:w-auto">
+                    Contáctanos
+                  </Button>
+                </Link>
+              </div>
             </div>
           </motion.div>
         </div>

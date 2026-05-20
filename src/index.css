@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -43,95 +42,124 @@
 }
 
 :root {
-  /* Paleta Loopra - Minimalismo Corporativo */
-  --primary: #0070F3;
-  --primary-foreground: #F8FAFC;
-  --secondary: #3B82F6;
-  --secondary-foreground: #F8FAFC;
-  --accent: #0070F3;
-  --accent-foreground: #F8FAFC;
-  --destructive: #EF4444;
-  --destructive-foreground: #F8FAFC;
+  /* Paleta Loopra - Minimalismo Corporativo Premium (Modo Claro) */
+  /* Anti-fatiga visual con colores cálidos y suaves */
+  --primary: #0066E6;
+  --primary-foreground: #FAFBFC;
+  --secondary: #4B8FFF;
+  --secondary-foreground: #FAFBFC;
+  --accent: #0066E6;
+  --accent-foreground: #FAFBFC;
+  --destructive: #E74C3C;
+  --destructive-foreground: #FAFBFC;
   
-  /* Colores base */
+  /* Colores base - Optimizados anti-fatiga */
   --radius: 1rem;
-  --background: #F8FAFC;
-  --foreground: #0F172A;
+  --background: #F9FAFB;
+  --foreground: #1A202C;
   --card: #FFFFFF;
-  --card-foreground: #0F172A;
+  --card-foreground: #1A202C;
   --popover: #FFFFFF;
-  --popover-foreground: #0F172A;
-  --muted: #E2E8F0;
-  --muted-foreground: #64748B;
-  --border: #E2E8F0;
-  --input: #E2E8F0;
-  --ring: #0070F3;
+  --popover-foreground: #1A202C;
+  --muted: #E8EDF2;
+  --muted-foreground: #6B7280;
+  --border: #E8EDF2;
+  --input: #E8EDF2;
+  --ring: #0066E6;
   
   /* Sidebar */
-  --sidebar: #F8FAFC;
-  --sidebar-foreground: #0F172A;
-  --sidebar-primary: #0070F3;
-  --sidebar-primary-foreground: #F8FAFC;
-  --sidebar-accent: #3B82F6;
-  --sidebar-accent-foreground: #F8FAFC;
-  --sidebar-border: #E2E8F0;
-  --sidebar-ring: #0070F3;
+  --sidebar: #F9FAFB;
+  --sidebar-foreground: #1A202C;
+  --sidebar-primary: #0066E6;
+  --sidebar-primary-foreground: #FAFBFC;
+  --sidebar-accent: #4B8FFF;
+  --sidebar-accent-foreground: #FAFBFC;
+  --sidebar-border: #E8EDF2;
+  --sidebar-ring: #0066E6;
   
   /* Charts */
-  --chart-1: #0070F3;
-  --chart-2: #3B82F6;
-  --chart-3: #60A5FA;
-  --chart-4: #93C5FD;
-  --chart-5: #DBEAFE;
+  --chart-1: #0066E6;
+  --chart-2: #4B8FFF;
+  --chart-3: #6FA3FF;
+  --chart-4: #8FB7FF;
+  --chart-5: #AECBFF;
 }
 
 .dark {
-  /* Paleta Loopra Dark - Minimalismo Corporativo Elevado */
-  /* Mantiene esencia del diseño con mejor contraste y legibilidad */
-  --primary: #3B82F6;
-  --primary-foreground: #F8FAFC;
-  --secondary: #60A5FA;
-  --secondary-foreground: #0F172A;
-  --accent: #3B82F6;
-  --accent-foreground: #F8FAFC;
-  --destructive: #FF6B6B;
-  --destructive-foreground: #0F172A;
+  /* Paleta Loopra Dark - Minimalismo Corporativo Premium (Modo Oscuro) */
+  /* Anti-fatiga visual con tonos cálidos y profundos */
+  --primary: #5BA3FF;
+  --primary-foreground: #F1F5F9;
+  --secondary: #7BB5FF;
+  --secondary-foreground: #F1F5F9;
+  --accent: #5BA3FF;
+  --accent-foreground: #F1F5F9;
+  --destructive: #F87171;
+  --destructive-foreground: #F1F5F9;
   
-  /* Colores base dark - Optimizados para contraste */
-  --background: #0A0E27;
-  --foreground: #F0F4F8;
-  --card: #141829;
-  --card-foreground: #F0F4F8;
-  --popover: #141829;
-  --popover-foreground: #F0F4F8;
+  /* Colores base dark - Optimizados anti-fatiga */
+  --background: #0F1419;
+  --foreground: #E8EDEF;
+  --card: #1A1F2E;
+  --card-foreground: #E8EDEF;
+  --popover: #1A1F2E;
+  --popover-foreground: #E8EDEF;
   --muted: #2D3748;
-  --muted-foreground: #A0AEC0;
+  --muted-foreground: #9CA3AF;
   --border: #2D3748;
   --input: #2D3748;
-  --ring: #3B82F6;
+  --ring: #5BA3FF;
   
   /* Sidebar dark */
-  --sidebar: #0A0E27;
-  --sidebar-foreground: #F0F4F8;
-  --sidebar-primary: #3B82F6;
-  --sidebar-primary-foreground: #F8FAFC;
-  --sidebar-accent: #60A5FA;
-  --sidebar-accent-foreground: #0F172A;
+  --sidebar: #0F1419;
+  --sidebar-foreground: #E8EDEF;
+  --sidebar-primary: #5BA3FF;
+  --sidebar-primary-foreground: #F1F5F9;
+  --sidebar-accent: #7BB5FF;
+  --sidebar-accent-foreground: #F1F5F9;
   --sidebar-border: #2D3748;
-  --sidebar-ring: #3B82F6;
+  --sidebar-ring: #5BA3FF;
   
-  /* Charts dark - Paleta armónica */
-  --chart-1: #3B82F6;
-  --chart-2: #60A5FA;
-  --chart-3: #93C5FD;
-  --chart-4: #BFDBFE;
-  --chart-5: #DBEAFE;
+  /* Charts dark - Paleta armónica premium */
+  --chart-1: #5BA3FF;
+  --chart-2: #7BB5FF;
+  --chart-3: #9BC7FF;
+  --chart-4: #BBD9FF;
+  --chart-5: #DBEBFF;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+  
+  /* Scrollbar moderno y premium */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--background);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--muted);
+    border-radius: 10px;
+    border: 2px solid var(--background);
+    transition: background 0.3s ease;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+  }
+  
+  /* Firefox scrollbar */
+  * {
+    scrollbar-color: var(--muted) var(--background);
+    scrollbar-width: thin;
+  }
+  
   html {
     scroll-behavior: smooth;
   }
@@ -145,13 +173,16 @@
     letter-spacing: -0.01em;
   }
   h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl;
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold;
   }
   h2 {
-    @apply text-3xl md:text-4xl;
+    @apply text-3xl md:text-4xl font-bold;
   }
   h3 {
-    @apply text-2xl md:text-3xl;
+    @apply text-2xl md:text-3xl font-semibold;
+  }
+  h4, h5, h6 {
+    @apply font-semibold;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),

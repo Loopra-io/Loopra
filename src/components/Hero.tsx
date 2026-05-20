@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 export default function Hero() {
   const containerVariants = {
@@ -49,20 +50,24 @@ export default function Hero() {
 
             {/* CTA Buttons */}
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-3 md:gap-4 pt-2">
-              <Button
-                size="lg"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-xl transition-all duration-200 hover:shadow-lg hover:scale-105 w-full sm:w-auto"
-              >
-                Consola de Control
-                <ArrowRight className="ml-2 w-4 h-4" strokeWidth={2} />
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-border hover:bg-muted rounded-xl transition-all duration-200 w-full sm:w-auto"
-              >
-                Explorar Lúmina
-              </Button>
+              <Link to="/consola-control">
+                <Button
+                  size="lg"
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-xl transition-all duration-200 hover:shadow-lg hover:scale-105 w-full sm:w-auto"
+                >
+                  Consola de Control
+                  <ArrowRight className="ml-2 w-4 h-4" strokeWidth={2} />
+                </Button>
+              </Link>
+              <a href="https://lumina.com" target="_blank" rel="noopener noreferrer">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="border-border hover:bg-muted rounded-xl transition-all duration-200 w-full sm:w-auto"
+                >
+                  Explorar Lúmina
+                </Button>
+              </a>
             </motion.div>
 
             {/* Stats — ✅ FIXED: gap más pequeño en móvil para que no se apriete */}

@@ -1,9 +1,20 @@
 import { motion } from 'framer-motion';
-import { BarChart3, Download, Settings } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { BarChart3 } from 'lucide-react';
 import { FC } from 'react';
 
-const DashboardHeader: FC = () => {
+export type Period = 'Hoy' | '7 días' | '30 días' | '90 días';
+
+const PERIODS: Period[] = ['Hoy', '7 días', '30 días', '90 días'];
+
+interface DashboardHeaderProps {
+  activePeriod: Period;
+  onPeriodChange: (period: Period) => void;
+}
+
+const DashboardHeader: FC<DashboardHeaderProps> = ({
+  activePeriod,
+  onPeriodChange,
+}) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: -20 }}
@@ -25,32 +36,16 @@ const DashboardHeader: FC = () => {
             Monitorea el rendimiento de tus ecosistemas en tiempo real
           </p>
         </div>
-
-        <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            className="rounded-lg border-border hover:bg-muted"
-          >
-            <Download className="w-4 h-4 mr-2" strokeWidth={1.5} />
-            Exportar
-          </Button>
-          <Button
-            variant="outline"
-            className="rounded-lg border-border hover:bg-muted"
-            size="icon"
-          >
-            <Settings className="w-4 h-4" strokeWidth={1.5} />
-          </Button>
-        </div>
       </div>
 
       {/* Period selector */}
       <div className="mt-6 flex flex-wrap gap-2">
-        {['Hoy', '7 días', '30 días', '90 días', 'Personalizado'].map((period) => (
+        {PERIODS.map((period) => (
           <button
             key={period}
+            onClick={() => onPeriodChange(period)}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${
-              period === '30 días'
+              period === activePeriod
                 ? 'bg-primary text-primary-foreground'
                 : 'bg-muted text-muted-foreground hover:bg-muted/80'
             }`}

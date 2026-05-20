@@ -1,8 +1,7 @@
 import { motion } from 'framer-motion';
-import { BookOpen, Zap, Rocket, ExternalLink } from 'lucide-react';
+import { BookOpen, Zap, Rocket, ExternalLink, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-
-// ✅ FIXED: <Layout> eliminado — App.tsx ya lo envuelve
+import { useState } from 'react';
 
 const projects = [
   {
@@ -11,7 +10,8 @@ const projects = [
     icon: BookOpen,
     status: 'Disponible',
     features: ['Plataforma educativa', 'Colaboración en tiempo real', 'Herramientas de evaluación'],
-    link: '/lumina',
+    href: 'https://lumina.com',
+    external: true,
     color: 'from-blue-400 to-cyan-400',
   },
   {
@@ -20,7 +20,8 @@ const projects = [
     icon: Zap,
     status: 'Próximamente',
     features: ['Automatización inteligente', 'Gestión colaborativa', 'Análisis en tiempo real'],
-    link: '#',
+    href: 'mailto:contacto@loopra.me',
+    external: true,
     color: 'from-purple-400 to-pink-500',
   },
   {
@@ -29,12 +30,22 @@ const projects = [
     icon: Rocket,
     status: 'En Desarrollo',
     features: ['Escalabilidad ilimitada', 'Conectividad global', 'Herramientas avanzadas'],
-    link: '#',
+    href: '#',
+    external: false,
     color: 'from-orange-400 to-red-500',
   },
 ];
 
+type Filter = 'Todos' | 'Disponible' | 'Próximamente' | 'En Desarrollo';
+const FILTERS: Filter[] = ['Todos', 'Disponible', 'Próximamente', 'En Desarrollo'];
+
 export default function Proyectos() {
+  const [activeFilter, setActiveFilter] = useState<Filter>('Todos');
+
+  const filtered = activeFilter === 'Todos'
+    ? projects
+    : projects.filter(p => p.status === activeFilter);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -51,12 +62,13 @@ export default function Proyectos() {
   return (
     <section className="py-16 md:py-24 px-4 md:px-8 lg:px-12 bg-background">
       <div className="max-w-7xl mx-auto">
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12 md:mb-16 lg:mb-20"
+          className="text-center mb-10 md:mb-14"
         >
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4">
             Nuestros Proyectos
@@ -66,22 +78,46 @@ export default function Proyectos() {
           </p>
         </motion.div>
 
+        {/* Filter Tabs */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+          className="flex flex-wrap justify-center gap-2 mb-12 md:mb-16"
+        >
+          {FILTERS.map(filter => (
+            <button
+              key={filter}
+              onClick={() => setActiveFilter(filter)}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${
+                activeFilter === filter
+                  ? 'bg-primary text-primary-foreground'
+                  : 'bg-muted text-muted-foreground hover:bg-muted/80'
+              }`}
+            >
+              {filter}
+            </button>
+          ))}
+        </motion.div>
+
         {/* Projects Grid */}
         <motion.div
+          key={activeFilter}
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {projects.map((project, index) => {
+          {filtered.map((project, index) => {
             const Icon = project.icon;
+            const isDisabled = project.href === '#';
+
             return (
               <motion.div
-                key={index}
+                key={project.name}
                 variants={itemVariants}
                 className="group relative"
               >
-                {/* Card — sin whileHover scale en móvil para evitar overflow */}
                 <motion.div
                   whileHover={{ scale: 1.03, y: -8 }}
                   transition={{ duration: 0.3 }}
@@ -91,10 +127,10 @@ export default function Proyectos() {
                   <div className="mb-4">
                     <span className={`text-xs font-semibold px-3 py-1 rounded-full ${
                       project.status === 'Disponible'
-                        ? 'bg-green-100 text-green-700'
+                        ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'
                         : project.status === 'Próximamente'
-                        ? 'bg-blue-100 text-blue-700'
-                        : 'bg-purple-100 text-purple-700'
+                        ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400'
+                        : 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400'
                     }`}>
                       {project.status}
                     </span>
@@ -126,13 +162,30 @@ export default function Proyectos() {
                   </div>
 
                   {/* CTA Button */}
-                  <Button
-                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl font-semibold transition-all duration-200"
-                    disabled={project.status !== 'Disponible'}
-                  >
-                    {project.status === 'Disponible' ? 'Explorar' : 'Próximamente'}
-                    <ExternalLink className="ml-2 w-4 h-4" strokeWidth={2} />
-                  </Button>
+                  {isDisabled ? (
+                    <Button
+                      className="w-full rounded-xl font-semibold opacity-50 cursor-not-allowed"
+                      disabled
+                    >
+                      En Desarrollo
+                      <Rocket className="ml-2 w-4 h-4" strokeWidth={2} />
+                    </Button>
+                  ) : (
+                    <a
+                      href={project.href}
+                      target={project.external ? '_blank' : undefined}
+                      rel={project.external ? 'noopener noreferrer' : undefined}
+                      className="w-full"
+                    >
+                      <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl font-semibold transition-all duration-200">
+                        {project.status === 'Disponible' ? 'Explorar' : 'Notificarme'}
+                        {project.status === 'Disponible'
+                          ? <ExternalLink className="ml-2 w-4 h-4" strokeWidth={2} />
+                          : <Mail className="ml-2 w-4 h-4" strokeWidth={2} />
+                        }
+                      </Button>
+                    </a>
+                  )}
                 </motion.div>
 
                 {/* Glow effect */}

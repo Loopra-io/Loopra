@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { BookOpen, Zap, Rocket, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 const ecosystems = [
   {
@@ -11,6 +12,8 @@ const ecosystems = [
     features: ['Plataforma educativa', 'Colaboración en tiempo real', 'Herramientas de evaluación', 'Comunidad global'],
     cta: 'Explorar Lúmina',
     highlighted: true,
+    href: 'https://lumina.com',
+    external: true,
   },
   {
     name: 'Próximo Ecosistema',
@@ -20,6 +23,8 @@ const ecosystems = [
     features: ['Automatización inteligente', 'Gestión colaborativa', 'Análisis en tiempo real', 'Integraciones avanzadas'],
     cta: 'Notificarme',
     highlighted: false,
+    href: 'mailto:contacto@loopra.me',
+    external: true,
   },
   {
     name: 'Futuro Ecosistema',
@@ -29,6 +34,8 @@ const ecosystems = [
     features: ['Escalabilidad ilimitada', 'Conectividad global', 'Herramientas avanzadas', 'Soporte empresarial'],
     cta: 'Más Información',
     highlighted: false,
+    href: '#',
+    external: false,
   },
 ];
 
@@ -131,17 +138,39 @@ export default function Products() {
                 </div>
 
                 {/* CTA Button */}
-                <Button
-                  className={`w-full rounded-xl font-semibold transition-all duration-200 ${
-                    ecosystem.highlighted
-                      ? 'bg-primary hover:bg-primary/90 text-primary-foreground'
-                      : 'border border-primary text-primary hover:bg-primary/10'
-                  }`}
-                  variant={ecosystem.highlighted ? 'default' : 'outline'}
-                >
-                  {ecosystem.cta}
-                  <ArrowRight className="ml-2 w-4 h-4" strokeWidth={2} />
-                </Button>
+                {ecosystem.href === '#' ? (
+                  <Button
+                    className={`w-full rounded-xl font-semibold transition-all duration-200 opacity-50 cursor-not-allowed ${
+                      ecosystem.highlighted
+                        ? 'bg-primary text-primary-foreground'
+                        : 'border border-primary text-primary'
+                    }`}
+                    variant={ecosystem.highlighted ? 'default' : 'outline'}
+                    disabled
+                  >
+                    {ecosystem.cta}
+                    <ArrowRight className="ml-2 w-4 h-4" strokeWidth={2} />
+                  </Button>
+                ) : (
+                  <a
+                    href={ecosystem.href}
+                    target={ecosystem.external ? '_blank' : undefined}
+                    rel={ecosystem.external ? 'noopener noreferrer' : undefined}
+                    className="w-full"
+                  >
+                    <Button
+                      className={`w-full rounded-xl font-semibold transition-all duration-200 ${
+                        ecosystem.highlighted
+                          ? 'bg-primary hover:bg-primary/90 text-primary-foreground'
+                          : 'border border-primary text-primary hover:bg-primary/10'
+                      }`}
+                      variant={ecosystem.highlighted ? 'default' : 'outline'}
+                    >
+                      {ecosystem.cta}
+                      <ArrowRight className="ml-2 w-4 h-4" strokeWidth={2} />
+                    </Button>
+                  </a>
+                )}
               </motion.div>
             );
           })}
