@@ -1,59 +1,56 @@
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 const plans = [
   {
-    name: 'Startup',
-    price: '$99',
-    period: '/mes',
-    description: 'Para emprendimientos y pequeños equipos',
-    features: [
-      'Acceso a 1 ecosistema',
-      'Hasta 50 usuarios',
-      '10 GB de almacenamiento',
-      'Soporte por email',
-      'Actualizaciones automáticas',
-      'API básica',
-    ],
-    cta: 'Comenzar',
-    highlighted: false,
-  },
-  {
-    name: 'Profesional',
-    price: '$299',
-    period: '/mes',
-    description: 'Para empresas en crecimiento',
-    features: [
-      'Acceso a todos los ecosistemas',
-      'Usuarios ilimitados',
-      '500 GB de almacenamiento',
-      'Soporte prioritario 24/7',
-      'Analíticas avanzadas',
-      'API completa',
-      'Integraciones personalizadas',
-      'Capacitación incluida',
-    ],
-    cta: 'Seleccionar Plan',
-    highlighted: true,
-  },
-  {
-    name: 'Empresarial',
-    price: 'Personalizado',
+    name: 'Solución Inicial',
+    price: 'Bajo consulta',
     period: '',
-    description: 'Para grandes organizaciones',
+    description: 'Comienza con una solución ágil y adaptada a tus primeras necesidades.',
     features: [
-      'Todo en Profesional',
-      'Almacenamiento ilimitado',
-      'Soporte dedicado 24/7',
-      'SLA garantizado 99.99%',
-      'Servidor dedicado',
-      'Auditoría y compliance',
-      'Onboarding personalizado',
-      'Roadmap dedicado',
+      'Atención personalizada',
+      'Soporte por email',
+      'Implementación guiada',
+      'Acceso a un ecosistema clave',
+      'Acompañamiento en la puesta en marcha',
     ],
-    cta: 'Contactar Ventas',
+    cta: 'Solicitar Cotización',
     highlighted: false,
+    param: 'inicial',
+  },
+  {
+    name: 'Escalamiento',
+    price: 'Bajo consulta',
+    period: '',
+    description: 'Un servicio pensado para empresas que necesitan crecer con confianza.',
+    features: [
+      'Capacitación para tu equipo',
+      'Soporte por email',
+      'Integraciones personalizadas',
+      'Acompañamiento estratégico',
+      'Escalabilidad sin fricciones',
+    ],
+    cta: 'Solicitar Cotización',
+    highlighted: true,
+    param: 'escalamiento',
+  },
+  {
+    name: 'Estrategia Corporativa',
+    price: 'Bajo consulta',
+    period: '',
+    description: 'Soluciones a medida para los retos más complejos de tu organización.',
+    features: [
+      'Atención personalizada dedicada',
+      'Capacitación a medida',
+      'Soporte por email',
+      'Roadmap de desarrollo compartido',
+      'Auditoría y cumplimiento normativo',
+    ],
+    cta: 'Solicitar Cotización',
+    highlighted: false,
+    param: 'corporativa',
   },
 ];
 
@@ -62,20 +59,13 @@ export default function Pricing() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1,
-      },
+      transition: { staggerChildren: 0.15, delayChildren: 0.1 },
     },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 },
-    },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
   return (
@@ -143,16 +133,18 @@ export default function Pricing() {
               </div>
 
               {/* CTA Button */}
-              <Button
-                className={`w-full mb-8 rounded-xl font-semibold transition-all duration-200 ${
-                  plan.highlighted
-                    ? 'bg-primary hover:bg-primary/90 text-primary-foreground'
-                    : 'border border-primary text-primary hover:bg-primary/10'
-                }`}
-                variant={plan.highlighted ? 'default' : 'outline'}
-              >
-                {plan.cta}
-              </Button>
+              <Link to={`/contacto?plan=${plan.param}`} className="w-full block mb-8">
+                <Button
+                  className={`w-full rounded-xl font-semibold transition-all duration-200 ${
+                    plan.highlighted
+                      ? 'bg-primary hover:bg-primary/90 text-primary-foreground'
+                      : 'border border-primary text-primary hover:bg-primary/10'
+                  }`}
+                  variant={plan.highlighted ? 'default' : 'outline'}
+                >
+                  {plan.cta}
+                </Button>
+              </Link>
 
               {/* Features List */}
               <div className="space-y-4">
@@ -170,4 +162,3 @@ export default function Pricing() {
     </section>
   );
 }
-

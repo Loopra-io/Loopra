@@ -1,6 +1,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
+import type { JSX } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import ErrorBoundary from "./components/ErrorBoundary";
 import Layout from './components/Layout';
@@ -10,15 +11,13 @@ import Documentacion from './pages/Documentacion';
 import Home from './pages/Home';
 import Proyectos from './pages/Proyectos';
 import SobreEstudio from './pages/SobreEstudio';
-import ConsolaControl from './pages/ConsolaControl';
 import Privacidad from './pages/Privacidad';
 import Terminos from './pages/Terminos';
-import Cookies from './pages/Cookies';
 import Cumplimiento from './pages/Cumplimiento';
 import Contacto from './pages/Contacto';
 import Carreras from './pages/Carreras';
 import Prensa from './pages/Prensa';
-import API from './pages/API';
+
 /**
  * Componente principal de la aplicación Loopra.
  *
@@ -48,7 +47,6 @@ function App(): JSX.Element {
               <Route path="/proyectos" element={<Layout><Proyectos /></Layout>} />
               <Route path="/sobre-estudio" element={<Layout><SobreEstudio /></Layout>} />
               <Route path="/docs" element={<Layout><Documentacion /></Layout>} />
-              <Route path="/consola-control" element={<Layout><ConsolaControl /></Layout>} />
 <Route
                   path="/privacidad"
                   element={
@@ -62,14 +60,6 @@ function App(): JSX.Element {
                   element={
                     <Layout>
                       <Terminos />
-                    </Layout>
-                  }
-                />
-                <Route
-                  path="/cookies"
-                  element={
-                    <Layout>
-                      <Cookies />
                     </Layout>
                   }
                 />
@@ -106,14 +96,6 @@ function App(): JSX.Element {
                   }
                 />
 
-                <Route
-                  path="/api"
-                  element={
-                    <Layout>
-                      <API />
-                    </Layout>
-                  }
-                />
               <Route path="/404" element={<Layout><NotFound /></Layout>} />
               <Route path="*" element={<Layout><NotFound /></Layout>} />
             </Routes>

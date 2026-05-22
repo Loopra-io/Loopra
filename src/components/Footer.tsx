@@ -8,7 +8,6 @@ const footerLinks: Record<string, FooterLink[]> = {
     { label: 'Lúmina',        href: 'https://lumina.com' },
     { label: 'Próximos',      href: '#'                  },
     { label: 'Documentación', href: '/docs'              },
-    { label: 'API',           href: '/API'                  },
   ],
   Desarrolladores: [
     { label: 'GitHub',        href: 'https://github.com/Loopra-io' },
@@ -23,10 +22,9 @@ const footerLinks: Record<string, FooterLink[]> = {
     { label: 'Contacto',         href: '/contacto' },
   ],
   Legal: [
-    { label: 'Privacidad',   href: '/privacidad' },
-    { label: 'Términos',     href: '/terminos'   },
-    { label: 'Cookies',      href: '/cookies'    },
-    { label: 'Cumplimiento', href: '/cumplimiento'           },
+    { label: 'Privacidad',   href: '/privacidad'   },
+    { label: 'Términos',     href: '/terminos'     },
+    { label: 'Cumplimiento', href: '/cumplimiento' },
   ],
 };
 
@@ -128,7 +126,7 @@ export default function Footer() {
           className="flex flex-col md:flex-row items-center justify-between gap-4"
         >
           <p className="text-sm text-muted-foreground">
-            © {currentYear} Loopra. Todos los derechos reservados. | Fundador: Kener Alejandro Botina Bravo
+            © {currentYear} Loopra. Todos los derechos reservados.
           </p>
           <div className="flex items-center gap-6">
             {socialLinks.map((social) => (

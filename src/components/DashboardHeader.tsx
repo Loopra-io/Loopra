@@ -44,6 +44,7 @@ const DashboardHeader: FC<DashboardHeaderProps> = ({
           <button
             key={period}
             onClick={() => onPeriodChange(period)}
+            aria-pressed={period === activePeriod}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${
               period === activePeriod
                 ? 'bg-primary text-primary-foreground'

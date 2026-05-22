@@ -6,7 +6,7 @@ export default function Carreras() {
   const jobs = [
     {
       title: 'Senior Full Stack Developer',
-      location: 'Bogotá, Colombia',
+      location: 'Cali, Valle del Cauca, Colombia',
       salary: '$80K - $120K',
       type: 'Tiempo Completo',
     },
@@ -18,7 +18,7 @@ export default function Carreras() {
     },
     {
       title: 'DevOps Engineer',
-      location: 'Bogotá, Colombia',
+      location: 'Cali, Valle del Cauca, Colombia',
       salary: '$70K - $110K',
       type: 'Tiempo Completo',
     },
@@ -68,9 +68,11 @@ export default function Carreras() {
                       </div>
                     </div>
                   </div>
-                  <Button className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg">
-                    Aplicar
-                  </Button>
+                  <a href={`mailto:hola@loopra.me?subject=Aplicación: ${job.title}`}>
+                    <Button className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg">
+                      Aplicar
+                    </Button>
+                  </a>
                 </div>
               </motion.div>
             ))}
@@ -88,9 +90,11 @@ export default function Carreras() {
             <p className="text-muted-foreground mb-6">
               Envíanos tu CV y cuéntanos sobre ti. Nos encantaría conocer talento en cualquier área.
             </p>
-            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg">
-              Enviar CV
-            </Button>
+            <a href="mailto:hola@loopra.me?subject=Envío de CV - Loopra">
+              <Button className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg">
+                Enviar CV
+              </Button>
+            </a>
           </motion.div>
         </motion.div>
       </div>

@@ -28,12 +28,12 @@ export default function CTA() {
 
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
-              <Link to="/consola-control">
+              <Link to="/contacto">
                 <Button
                   size="lg"
                   className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-xl transition-all duration-200 hover:shadow-lg hover:scale-105 w-full sm:w-auto"
                 >
-                  Consola de Control
+                  Contáctanos
                   <ArrowRight className="ml-2 w-4 h-4" strokeWidth={2} />
                 </Button>
               </Link>

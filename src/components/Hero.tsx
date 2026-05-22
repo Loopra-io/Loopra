@@ -50,12 +50,12 @@ export default function Hero() {
 
             {/* CTA Buttons */}
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-3 md:gap-4 pt-2">
-              <Link to="/consola-control">
+              <Link to="/contacto">
                 <Button
                   size="lg"
                   className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-xl transition-all duration-200 hover:shadow-lg hover:scale-105 w-full sm:w-auto"
                 >
-                  Consola de Control
+                  Contáctanos
                   <ArrowRight className="ml-2 w-4 h-4" strokeWidth={2} />
                 </Button>
               </Link>

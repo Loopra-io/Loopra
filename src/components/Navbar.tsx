@@ -196,9 +196,9 @@ const Navbar: FC = () => {
                 Explorar Lúmina
               </Button>
             </a>
-            <Link to="/consola-control">
-              <Button className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg font-medium">
-                Consola de Control
+            <Link to="/contacto">
+              <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-lg">
+                Contacto
               </Button>
             </Link>
           </div>
@@ -283,9 +283,9 @@ const Navbar: FC = () => {
                     Explorar Lúmina
                   </Button>
                 </a>
-                <Link to="/consola-control" className="w-full">
-                  <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg font-medium">
-                    Consola de Control
+                <Link to="/contacto" className="w-full">
+                  <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-lg">
+                    Contacto
                   </Button>
                 </Link>
               </div>

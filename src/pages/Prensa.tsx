@@ -63,12 +63,9 @@ export default function Prensa() {
                 <p className="text-muted-foreground">
                   {article.excerpt}
                 </p>
-                <a
-                  href="#"
-                  className="inline-block mt-4 text-primary hover:text-primary/80 font-medium"
-                >
-                  Leer más →
-                </a>
+                <span className="inline-block mt-4 text-muted-foreground/40 text-sm font-medium cursor-not-allowed select-none">
+                  Próximamente →
+                </span>
               </motion.article>
             ))}
           </div>
@@ -85,12 +82,9 @@ export default function Prensa() {
             <p className="text-muted-foreground mb-6">
               Descarga nuestro kit de prensa con logos, imágenes y información sobre Loopra.
             </p>
-            <a
-              href="#"
-              className="inline-block bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-lg font-medium"
-            >
-              Descargar Kit de Prensa
-            </a>
+            <span className="inline-block bg-muted text-muted-foreground/50 px-6 py-3 rounded-lg font-medium cursor-not-allowed select-none text-sm">
+              Próximamente
+            </span>
           </motion.div>
         </motion.div>
       </div>
